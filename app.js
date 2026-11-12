@@ -7,8 +7,10 @@ function upcoming(){let now=new Date();for(let[k,n]of ps){let[h,m]=times[k].spli
 function next(){if(!times.Fajr)return;let x=upcoming(),z=x.d-Date.now();$('nextName').textContent=x.n;$('nextTime').textContent=fmt(times[x.k]);$('countdown').textContent=`متبقي ${Math.floor(z/3600000)} ساعة و${Math.floor(z%3600000/60000)} دقيقة`;document.querySelectorAll('.prayer').forEach(a=>a.classList.remove('active'));$('p'+x.k)?.classList.add('active')}
 function watch(){clearInterval(tick);done={};tick=setInterval(()=>{next();if(!cfg.enabled)return;let d=new Date(),day=d.toDateString();if(done.day!==day)done={day};ps.forEach(([k,n])=>{let[h,m]=times[k].split(':').map(Number),t=new Date();t.setHours(h,m+Number(cfg.offset),0,0);if(d.getHours()===t.getHours()&&d.getMinutes()===t.getMinutes()&&d.getSeconds()<7&&!done[k]){done[k]=true;openCall(n)}})},1000)}
 function openCall(n){$('callName').textContent='حان وقت صلاة '+n;$('call').classList.add('show');if(cfg.sound)beep();if(Notification.permission==='granted')new Notification('المُصَلِّي',{body:'حان وقت '+n})}
-function beep(){stopBeep();try{audio=new AudioContext();let play=()=>{if(!audio)return;let o=audio.createOscillator(),g=audio.createGain();o.frequency.value=740;g.gain.value=.045;o.connect(g);g.connect(audio.destination);o.start();o.stop(audio.currentTime+.22)};play();ring=setInterval(play,850)}catch{}}
-function stopBeep(){clearInterval(ring);audio?.close();audio=null}
+// أذان الحرم المكي (علي بن أحمد ملا) — يتطلب اتصال إنترنت
+const ADHAN_URL='https://www.sama3y.net/forum/attachment.php?attachmentid=283397&d=1329660947&s=ff759cde2e3bb30adcfc5f1e3ade7d39';
+function beep(){stopBeep();try{audio=new Audio(ADHAN_URL);audio.loop=false;audio.volume=1;audio.play().catch(()=>toast('اضغط تجربة التنبيه للسماح بتشغيل الأذان'));}catch{toast('تعذر تشغيل الأذان')}}
+function stopBeep(){clearInterval(ring);if(audio){try{audio.pause();audio.currentTime=0;}catch{}audio=null}}
 function closeCall(s){$('call').classList.remove('show');stopBeep();toast(s)}
 $('loc').onclick=locationGet;$('refresh').onclick=fetchTimes;$('test').onclick=()=>openCall('التجربة');$('answer').onclick=()=>closeCall('استجبت للصلاة • تقبل الله منا ومنكم');$('decline').onclick=()=>closeCall('تم إغلاق التنبيه');
 function openSettings(){$('modal').classList.add('show');$('method').value=cfg.method;$('offset').value=cfg.offset}
