@@ -1,10 +1,1 @@
-{
-  "name": "Mivo Social",
-  "short_name": "Mivo",
-  "start_url": "./",
-  "display": "standalone",
-  "background_color": "#080b10",
-  "theme_color": "#080b10",
-  "orientation": "portrait",
-  "icons": []
-}
+{"name":"M Chat","short_name":"M Chat","start_url":"./","display":"standalone","background_color":"#07110e","theme_color":"#07110e"}
