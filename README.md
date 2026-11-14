@@ -1,25 +1,2 @@
-المُصلّي — GitHub Pages Ready
-
-طريقة النشر:
-1. أنشئ Repository جديدًا على GitHub (مثلاً AlMusalli).
-2. فك ضغط AlMusalli_GitHub.zip وارفع كل محتويات المجلد إلى جذر المستودع (بما فيها .github).
-3. اجعل اسم الفرع main.
-4. افتح Settings → Pages وتأكد أن Source هو GitHub Actions.
-5. انتظر انتهاء Actions بنجاح، وسيظهر رابط الموقع في Pages.
-
-تشغيل محلي:
-- افتح index.html عبر خادم محلي أو استضافة HTTPS (ليس file:// للحصول على service worker).
-- على الهاتف افتح رابط GitHub Pages ثم اختر Add to Home screen.
-
-المميزات الموجودة:
-- واجهة عربية RTL فخمة داكنة/ذهبية.
-- مواقيت الصلاة والعد التنازلي (AlAdhan API؛ الافتراضي الرياض).
-- القرآن الكريم (AlQuran Cloud)، أذكار، مسبحة محفوظة محليًا، تقويم هجري.
-- إعدادات المدينة وطريقة الحساب والصوت/الاهتزاز والتنبيهات.
-- شاشة اتصال تجريبية داخل الموقع ونطق العبارة عند الإجابة.
-
-حدود مهمة:
-- GitHub Pages يستضيف ملفات ثابتة فقط ولا يشغّل Backend أو جدولة إشعارات.
-- Web Push بالخلفية يتطلب Push Server/اشتراك VAPID؛ الإشعار المحلي المجدول بدقة ليس مضمونًا على الويب.
-- لا يمكن لصفحة GitHub Pages أن تفتح شاشة مكالمة نظام تلقائيًا أو تتجاوز قفل الهاتف. شاشة المكالمة الحالية تعمل داخل التطبيق عند فتحه/التجربة.
-- للوصول إلى مكالمة تشبه مكالمات الهاتف مع تنبيه موثوق وقت الصلاة، يلزم تطبيق Android أصلي (Kotlin) وصلاحيات Alarm/Notifications/Full-screen intent. Full-screen intent في Android مخصص للحالات المهمة مثل المكالمات والمنبهات ويخضع لموافقة النظام.
+## Firebase security notes
+Rules are a starting point, not production-complete. Tighten post update rules (likes should use a separate likes subcollection to prevent abuse), validate all fields and sizes, add App Check, rate limits, moderation, and server-side notification triggers before public launch.
