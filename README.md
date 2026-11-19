@@ -1,17 +1,25 @@
-# M Chat — GitHub Pages + Firebase
+# M Player
 
-Arabic RTL private messaging prototype with Firebase Authentication, Firestore live chats, voice-note upload (Firebase Storage), and WebRTC audio-call signaling.
+مشغل فيديو ويب محلي بواجهة عربية RTL، جاهز للنشر على GitHub Pages.
 
-## Setup
-1. Firebase Console > Authentication > Sign-in method > enable Email/Password.
-2. Create Firestore Database and publish `firebase/firestore.rules`.
-3. Firebase Storage > Get started > publish `firebase/storage.rules`.
-4. Authentication > Settings > Authorized domains: add your GitHub Pages domain (`USERNAME.github.io`).
-5. Upload the contents of this folder to repository `m-chat` (root), enable GitHub Pages on `main` / root.
-6. Open the HTTPS site on two devices/accounts, create accounts, start a chat using the other account's email, then call.
+## التشغيل
+1. ارفع محتويات المجلد إلى مستودع GitHub.
+2. من **Settings → Pages** اختر النشر من الفرع `main` والمجلد `/root`.
+3. افتح رابط GitHub Pages. يفضّل استخدام HTTPS.
+4. اضغط **إضافة فيديوهات** واختر ملفات الفيديو من جهازك.
 
-## Important
-- Never place Firebase Admin/service-account private keys in this client project or GitHub. Revoke any exposed service-account key in Google Cloud IAM immediately.
-- WebRTC uses public STUN only. Some carrier/NAT networks require a TURN server for reliable audio calls; configure TURN credentials via a secure backend (never publish credentials).
-- Web Push needs Firebase Cloud Messaging setup and a trusted server/Cloud Function to send notifications. The included service worker only handles incoming push events; it does not send push by itself.
-- This is a feature-rich starter, not a production WhatsApp clone. Add App Check, stricter rules, rate limits, reporting/blocking, encryption strategy, and privacy policy before public launch.
+## المزايا الحالية
+- إضافة ملفات فيديو محلية متعددة من جهاز المستخدم.
+- مكتبة مع بحث وفرز حسب الاسم أو المدة أو الأحدث.
+- مشغل HTML5 مع التشغيل والإيقاف والتقديم والتأخير وملء الشاشة.
+- تغيير سرعة التشغيل.
+- تحميل ملفات ترجمة VTT وSRT (قد يختلف دعم SRT بحسب المتصفح).
+- قوائم تشغيل والمفضلة (ضمن الجلسة الحالية).
+- متابعة المشاهدة أثناء بقاء الصفحة مفتوحة.
+- وضع داكن/فاتح وواجهة متجاوبة.
+- PWA مع Service Worker لتخزين ملفات الواجهة.
+
+## حدود مهمة
+هذا إصدار ويب أولي وليس نسخة مطابقة أو تطبيق Android أصلياً. المتصفح لا يمنح صفحة GitHub وصولاً دائماً وشاملاً إلى مجلدات الهاتف؛ على المستخدم اختيار الملفات، وروابط الملفات المحلية المؤقتة تنتهي عند إغلاق الصفحة أو تحديثها. لا يوجد رفع أو بث شبكي أو استخراج تلقائي لكل ملفات الجهاز. دعم MKV/AVI والصوتيات والترجمات يعتمد على المتصفح والترميز داخل الملف؛ بعض الملفات قد لا تعمل في Chrome أو WebView. استكمال التشغيل والقوائم في هذا الإصدار محفوظان في الذاكرة أثناء الجلسة فقط.
+
+للوصول إلى فهرسة دائمة لملفات الجهاز، ودعم ترميزات أوسع، ومكتبة محفوظة بين مرات التشغيل، يلزم إصدار Android أصلي أو تطبيق هجين بصلاحيات ملفات مناسبة.
